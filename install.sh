@@ -30,7 +30,7 @@ echo "##### Installing docker packages..."
 sudo apt-get update > /dev/null
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose > /dev/null
 
-if [ ! -f /var/lib/hydrominder/ssl/hydrominder.key ]; then
+if sudo test ! -f /var/lib/hydrominder/ssl/hydrominder.key; then
     # this cert should NEVER change, except if it expired
     echo "##### Creating self-signed SSL certificate..."
     # Valid for 10 years (TODO: automatically renew this)
@@ -56,12 +56,11 @@ API_TOKEN=$(openssl rand -base64 32)
 sudo -u hydrominder mkdir -p /var/lib/hydrominder/var > /dev/null
 sudo chmod -R 700 /var/lib/hydrominder/var > /dev/null
 
-if [ ! -f /var/lib/hydrominder/var/api_cookie.env ]; then
+if sudo test ! -f /var/lib/hydrominder/var/api_cookie.env; then
     # this cookie secret should NEVER change
     echo "##### Generating secure 64-byte key for API cookie..."
     COOKIE_SECRET=$(openssl rand -base64 32)
 
-    # Controller env
     sudo -u hydrominder tee /var/lib/hydrominder/var/api_cookie.env <<EOT > /dev/null
 SECRET=${COOKIE_SECRET}
 EOT
