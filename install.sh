@@ -3,7 +3,7 @@ clear
 
 echo "##### Installing packages..."
 sudo apt-get update > /dev/null
-sudo apt-get install -y git openssl inotify-tools > /dev/null
+sudo apt-get install -y git openssl pass inotify-tools > /dev/null
 
 echo "##### Creating 'hydrominder' group..."
 sudo groupadd --system hydrominder > /dev/null
