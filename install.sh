@@ -100,7 +100,7 @@ sudo docker --config /var/lib/hydrominder/docker_configs/.hydrominder_app login 
 sudo docker --config /var/lib/hydrominder/docker_configs/.hydrominder_controller login registry.gitlab.utwente.nl -u CLIENT -p qV439CsvoBqdWKJ2z5-M 2> /dev/null
 
 # pull the containers
-./pull-containers.sh
+sudo ./pull-containers.sh
 
 echo "##### Starting docker compose..."
 sudo docker-compose up -d
