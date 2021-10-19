@@ -21,6 +21,12 @@ This is the installer for HydroMinder.
 $ curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/docker-compose/install.sh | sudo bash -s
 ```
 
+## Update Installation
+
+```bash
+$ sudo /var/lib/hydrominder/scripts/update.sh
+```
+
 ## License
 
 HydroMinder API is [MIT licensed](LICENSE).
