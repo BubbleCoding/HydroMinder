@@ -19,6 +19,7 @@ cd /var/lib/hydrominder/ > /dev/null
 # TODO: Overwrite existing directory
 sudo git clone https://gitlab.utwente.nl/cs21-32/hydrominderscripts.git scripts
 sudo chmod ug+x /var/lib/hydrominder/scripts/*.sh > /dev/null 2>&1
+cd /var/lib/hydrominder/scripts/
 
 echo "##### Installing Docker and required packages..."
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release > /dev/null
@@ -55,28 +56,28 @@ API_TOKEN=$(openssl rand -base64 32)
 echo "##### Creating environment variable files..."
 # These should loaded when running the docker container
 sudo -u hydrominder mkdir -p /var/lib/hydrominder/var > /dev/null
-sudo chmod -R 600 /var/lib/hydrominder/var > /dev/null
+sudo chmod -R 700 /var/lib/hydrominder/var > /dev/null
 
 # DB env
-sudo -u hydrominder cat <<EOT >> /var/lib/hydrominder/var/db.env
+sudo -u hydrominder tee /var/lib/hydrominder/var/db.env <<EOT  > /dev/null
 POSTGRES_DB=hydrominder
 POSTGRES_USER=hydrominder
 POSTGRES_PASSWORD=${DB_PASSWORD}
 EOT
 
 # API env
-sudo -u hydrominder cat <<EOT >> /var/lib/hydrominder/var/api.env
+sudo -u hydrominder tee /var/lib/hydrominder/var/api.env <<EOT > /dev/null
 DB_HOST=postgres
 DB_PORT=5432
 SECRET=${COOKIE_SECRET}
 EOT
 
 # Web App env
-sudo -u hydrominder cat <<EOT >> /var/lib/hydrominder/var/webapp.env
+sudo -u hydrominder tee /var/lib/hydrominder/var/webapp.env <<EOT > /dev/null
 EOT
 
 # Controller env
-sudo -u hydrominder cat <<EOT >> /var/lib/hydrominder/var/controller.env
+sudo -u hydrominder tee /var/lib/hydrominder/var/controller.env <<EOT > /dev/null
 API_TOKEN=${API_TOKEN}
 EOT
 
@@ -89,14 +90,8 @@ sudo docker --config /var/lib/hydrominder/docker_configs/.hydrominder_api login 
 sudo docker --config /var/lib/hydrominder/docker_configs/.hydrominder_app login registry.gitlab.utwente.nl -u CLIENT -p SQyRA_B2hzBXZJ9sdiUs 2> /dev/null
 sudo docker --config /var/lib/hydrominder/docker_configs/.hydrominder_controller login registry.gitlab.utwente.nl -u CLIENT -p qV439CsvoBqdWKJ2z5-M 2> /dev/null
 
-#echo "##### Pulling containers..."
-# API pull token: AZuNxneL16MhQ2xsxDBv (public)
-#sudo docker --config /var/lib/hydrominder/docker_configs/.hydrominder_api pull registry.gitlab.utwente.nl/cs21-32/hydrominder_api > /dev/null
-# Web App pull token: SQyRA_B2hzBXZJ9sdiUs (public)
-#sudo docker --config /var/lib/hydrominder/docker_configs/.hydrominder_app pull registry.gitlab.utwente.nl/cs21-32/hydrominder_app > /dev/null
-# Controller pull token: qV439CsvoBqdWKJ2z5-M (public)
-#sudo docker --config /var/lib/hydrominder/docker_configs/.hydrominder_controller pull registry.gitlab.utwente.nl/cs21-32/hydrominder > /dev/null
+# pull the containers
+./pull-containers.sh
 
 echo "##### Starting docker compose..."
-cd /var/lib/hydrominder/scripts/
 sudo docker-compose up -d

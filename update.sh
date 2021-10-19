@@ -8,10 +8,10 @@ sudo git reset --hard && sudo git pull
 # chmod all scripts again
 sudo chmod ug+x /var/lib/hydrominder/scripts/*.sh > /dev/null 2>&1
 
-# TODO: restart shutdown-watcher.sh
+# TODO: recreate shutdown-watcher.sh service
 
-echo "##### Pulling container updates..."
-sudo docker-compose pull
+# pull the containers
+./pull-containers.sh
 
 echo "##### Restarting containers..."
 sudo docker-compose restart
