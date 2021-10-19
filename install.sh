@@ -18,9 +18,9 @@ echo "##### Cloning the whole scripts repository..."
 cd /var/lib/hydrominder/
 # TODO: Overwrite existing directory
 sudo git clone https://gitlab.utwente.nl/cs21-32/hydrominderscripts.git scripts
-sudo chmod ug+x /var/lib/hydrominder/scripts/*.sh > /dev/null 2>&1
 cd /var/lib/hydrominder/scripts/
 sudo git reset --hard && sudo git pull > /dev/null
+sudo chmod ug+x /var/lib/hydrominder/scripts/*.sh > /dev/null 2>&1
 
 echo "##### Installing Docker and required packages..."
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release > /dev/null
