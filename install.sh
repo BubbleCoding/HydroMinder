@@ -24,7 +24,7 @@ echo "##### Installing Docker and required packages..."
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release > /dev/null
 echo "##### Adding GPG key..."
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-echo "##### Installing docker pagackes..."
+echo "##### Installing docker packages..."
 sudo apt-get update > /dev/null
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose > /dev/null
 
@@ -97,6 +97,6 @@ sudo docker --config /var/lib/hydrominder/docker_configs/.hydrominder_controller
 # Controller pull token: qV439CsvoBqdWKJ2z5-M (public)
 #sudo docker --config /var/lib/hydrominder/docker_configs/.hydrominder_controller pull registry.gitlab.utwente.nl/cs21-32/hydrominder > /dev/null
 
-# TODO: docker-compose up -d
+echo "##### Starting docker compose..."
 cd /var/lib/hydrominder/scripts/
 sudo docker-compose up -d
