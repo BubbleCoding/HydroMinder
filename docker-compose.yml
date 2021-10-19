@@ -2,14 +2,14 @@ version: '3.3'
 services:
    postgres:
       container_name: postgres
-      image: postgres:14.0
+      image: postgres:14.0-alpine
       restart: unless-stopped
       environment:
          - /var/lib/hydrominder/var/db.env
    api:
       container_name: api
       image: registry.gitlab.utwente.nl/cs21-32/hydrominder_api
-      command: "--config /var/lib/hydrominder/docker_configs/.hydrominder_api"
+      command: bash -c "docker login registry.gitlab.utwente.nl -u CLIENT -p AZuNxneL16MhQ2xsxDBv"
       restart: unless-stopped
       environment:
          - /var/lib/hydrominder/var/db.env
