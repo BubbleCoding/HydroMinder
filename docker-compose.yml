@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+   postgres:
+      container_name: postgres
+      image: postgres:14.0
+      restart: unless-stopped
+      environment:
+         - /var/lib/hydrominder/var/db.env
+   api:
+      container_name: api
+      image: registry.gitlab.utwente.nl/cs21-32/hydrominder_api
+      command: "--config /var/lib/hydrominder/docker_configs/.hydrominder_api"
+      restart: unless-stopped
+      environment:
+         - /var/lib/hydrominder/var/db.env
+         - /var/lib/hydrominder/var/api.env
+      ports:
+         - 3000:3000
+      depends_on:
+         - postgres
