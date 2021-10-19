@@ -15,11 +15,12 @@ sudo mkdir -p /var/lib/hydrominder > /dev/null
 sudo chown -R hydrominder:hydrominder /var/lib/hydrominder > /dev/null
 
 echo "##### Cloning the whole scripts repository..."
-cd /var/lib/hydrominder/ > /dev/null
+cd /var/lib/hydrominder/
 # TODO: Overwrite existing directory
 sudo git clone https://gitlab.utwente.nl/cs21-32/hydrominderscripts.git scripts
 sudo chmod ug+x /var/lib/hydrominder/scripts/*.sh > /dev/null 2>&1
 cd /var/lib/hydrominder/scripts/
+sudo git reset --hard && sudo git pull > /dev/null
 
 echo "##### Installing Docker and required packages..."
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release > /dev/null
@@ -29,35 +30,44 @@ echo "##### Installing docker packages..."
 sudo apt-get update > /dev/null
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose > /dev/null
 
-echo "##### Creating self-signed SSL certificate..."
-# Valid for 10 years (TODO: automatically renew this)
-sudo -u hydrominder mkdir -p /var/lib/hydrominder/ssl > /dev/null
+if [ /var/lib/hydrominder/ssl/hydrominder.key does not exist ]; then
+    # this cert should NEVER change, except if it expired
+    echo "##### Creating self-signed SSL certificate..."
+    # Valid for 10 years (TODO: automatically renew this)
+    sudo -u hydrominder mkdir -p /var/lib/hydrominder/ssl > /dev/null
 
-touch /var/lib/hydrominder/ssl/hydrominder.key
-touch /var/lib/hydrominder/ssl/hydrominder.crt
-echo "##### Making private key rw for user..."
-sudo chmod 600 /var/lib/hydrominder/ssl/hydrominder.key > /dev/null
-echo "##### Making public key rw for user, r for others..."
-sudo chmod 644 /var/lib/hydrominder/ssl/hydrominder.crt > /dev/null
-echo "##### Generating key..."
-sudo openssl req -newkey rsa:2048 -x509 -sha256 -days 3650 -nodes -subj "/C=US/ST=State/L=City/O=Dis/CN=*" -keyout /var/lib/hydrominder/ssl/hydrominder.key -out /var/lib/hydrominder/ssl/hydrominder.crt > /dev/null
-
-echo "##### Generating secure 64-byte key for API cookie..."
-COOKIE_SECRET=$(openssl rand -base64 32)
+    touch /var/lib/hydrominder/ssl/hydrominder.key
+    touch /var/lib/hydrominder/ssl/hydrominder.crt
+    echo "##### Making private key rw for user..."
+    sudo chmod 600 /var/lib/hydrominder/ssl/hydrominder.key > /dev/null
+    echo "##### Making public key rw for user, r for others..."
+    sudo chmod 644 /var/lib/hydrominder/ssl/hydrominder.crt > /dev/null
+    echo "##### Generating key..."
+    sudo openssl req -newkey rsa:2048 -x509 -sha256 -days 3650 -nodes -subj "/C=US/ST=State/L=City/O=Dis/CN=*" -keyout /var/lib/hydrominder/ssl/hydrominder.key -out /var/lib/hydrominder/ssl/hydrominder.crt > /dev/null
+fi
 
 echo "##### Generating password for DB..."
 DB_PASSWORD=$(openssl rand -base64 12)
-DB_HOST="postgres"
-export $DB_HOST
 
 echo "##### Generating key for Controller <-> API communication..."
 API_TOKEN=$(openssl rand -base64 32)
 
-echo "##### Creating environment variable files..."
-# These should loaded when running the docker container
+# Create directory to store env variables
 sudo -u hydrominder mkdir -p /var/lib/hydrominder/var > /dev/null
 sudo chmod -R 700 /var/lib/hydrominder/var > /dev/null
 
+if [ /var/lib/hydrominder/var/api_cookie.env does not exist ]; then
+    # this cookie secret should NEVER change
+    echo "##### Generating secure 64-byte key for API cookie..."
+    COOKIE_SECRET=$(openssl rand -base64 32)
+
+    # Controller env
+    sudo -u hydrominder tee /var/lib/hydrominder/var/api_cookie.env <<EOT > /dev/null
+SECRET=${COOKIE_SECRET}
+EOT
+fi
+
+echo "##### Creating environment variable files..."
 # DB env
 sudo -u hydrominder tee /var/lib/hydrominder/var/db.env <<EOT  > /dev/null
 POSTGRES_DB=hydrominder
@@ -69,7 +79,6 @@ EOT
 sudo -u hydrominder tee /var/lib/hydrominder/var/api.env <<EOT > /dev/null
 DB_HOST=postgres
 DB_PORT=5432
-SECRET=${COOKIE_SECRET}
 EOT
 
 # Web App env
@@ -77,8 +86,8 @@ sudo -u hydrominder tee /var/lib/hydrominder/var/webapp.env <<EOT > /dev/null
 EOT
 
 # Controller env
-sudo -u hydrominder tee /var/lib/hydrominder/var/controller.env <<EOT > /dev/null
-API_TOKEN=${API_TOKEN}
+sudo -u hydrominder tee /var/lib/hydrominder/var/controller_token.env <<EOT > /dev/null
+API_CONTROLLER_TOKEN=${API_TOKEN}
 EOT
 
 # TODO: Add the /var/lib/hydrominder/git/shutdown-watcher.sh script as a systemd service
