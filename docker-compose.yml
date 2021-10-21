@@ -5,18 +5,18 @@ services:
       image: postgres:14.0-alpine
       restart: unless-stopped
       env_file:
-         - /var/lib/hydrominder/var/db.env:ro
+         - ../var/db.env:ro
    api:
       container_name: api
       image: registry.gitlab.utwente.nl/cs21-32/hydrominder_api
       restart: unless-stopped
       env_file:
-         - /var/lib/hydrominder/var/db.env:ro
-         - /var/lib/hydrominder/var/api.env:ro
-         - /var/lib/hydrominder/var/api_cookie.env:ro
-         - /var/lib/hydrominder/var/controller_token.env:ro
+         - ../var/db.env:ro
+         - ../var/api.env:ro
+         - ../var/api_cookie.env:ro
+         - ../var/controller_token.env:ro
       volumes:
-         - /var/lib/hydrominder/shutdown_signal:/shutdown_signal
+         - ../shutdown_signal:/shutdown_signal
       depends_on:
          - postgres
    webapp:
@@ -30,5 +30,5 @@ services:
          - api
       volumes:
          - ./nginx.conf:/etc/nginx/nginx.conf:ro
-         - /var/lib/hydrominder/ssl/hydrominder.crt:/etc/ssl/certs/hydrominder-selfsigned.crt:ro
-         - /var/lib/hydrominder/ssl/hydrominder.key:/etc/ssl/private/hydrominder-selfsigned.key:ro
+         - ../ssl/hydrominder.crt:/etc/ssl/certs/hydrominder-selfsigned.crt:ro
+         - ../ssl/hydrominder.key:/etc/ssl/private/hydrominder-selfsigned.key:ro
