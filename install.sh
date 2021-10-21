@@ -64,7 +64,7 @@ if sudo [ ! -f $VAR_DIR/api_cookie.env ]; then
     # this cookie secret should NEVER change
     echo "##### Generating secure 64-byte key for API cookie..."
     COOKIE_SECRET=$(openssl rand -base64 32)
-
+    sudo -u hydrominder touch $VAR_DIR/api_cookie.env
     sudo -u hydrominder tee $VAR_DIR/api_cookie.env <<EOT > /dev/null
 SECRET=${COOKIE_SECRET}
 EOT
@@ -72,6 +72,7 @@ fi
 
 echo "##### Creating environment variable files..."
 # DB env
+sudo -u hydrominder touch $VAR_DIR/db.env
 sudo -u hydrominder tee $VAR_DIR/db.env <<EOT  > /dev/null
 POSTGRES_DB=hydrominder
 POSTGRES_USER=hydrominder
@@ -79,16 +80,19 @@ POSTGRES_PASSWORD=${DB_PASSWORD}
 EOT
 
 # API env
+sudo -u hydrominder touch $VAR_DIR/api.env
 sudo -u hydrominder tee $VAR_DIR/api.env <<EOT > /dev/null
 DB_HOST=postgres
 DB_PORT=5432
 EOT
 
 # Web App env
+sudo -u hydrominder touch $VAR_DIR/webapp.env
 sudo -u hydrominder tee $VAR_DIR/webapp.env <<EOT > /dev/null
 EOT
 
 # Controller env
+sudo -u hydrominder touch $VAR_DIR/controller_token.env
 sudo -u hydrominder tee $VAR_DIR/controller_token.env <<EOT > /dev/null
 API_CONTROLLER_TOKEN=${API_TOKEN}
 EOT
