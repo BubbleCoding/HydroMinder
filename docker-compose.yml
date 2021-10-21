@@ -5,16 +5,16 @@ services:
       image: postgres:14.0-alpine
       restart: unless-stopped
       env_file:
-         - /var/lib/hydrominder/var/db.env
+         - /var/lib/hydrominder/var/db.env:ro
    api:
       container_name: api
       image: registry.gitlab.utwente.nl/cs21-32/hydrominder_api
       restart: unless-stopped
       env_file:
-         - /var/lib/hydrominder/var/db.env
-         - /var/lib/hydrominder/var/api.env
-         - /var/lib/hydrominder/var/api_cookie.env
-         - /var/lib/hydrominder/var/controller_token.env
+         - /var/lib/hydrominder/var/db.env:ro
+         - /var/lib/hydrominder/var/api.env:ro
+         - /var/lib/hydrominder/var/api_cookie.env:ro
+         - /var/lib/hydrominder/var/controller_token.env:ro
       volumes:
          - /var/lib/hydrominder/shutdown_signal:/shutdown_signal
       depends_on:
