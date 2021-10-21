@@ -14,7 +14,7 @@ services:
          - ../var/db.env
          - ../var/api.env
          - ../var/api_cookie.env
-         - ../var/controller_token.env:
+         - ../var/controller_token.env
       volumes:
          - ../shutdown_signal:/shutdown_signal
       depends_on:
