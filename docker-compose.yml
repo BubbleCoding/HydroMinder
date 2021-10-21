@@ -19,3 +19,16 @@ services:
          - 3000:3000
       depends_on:
          - postgres
+   webapp:
+      container_name: webapp
+      image: registry.gitlab.utwente.nl/cs21-32/hydrominder_app
+      restart: unless-stopped
+      ports:
+         - 80:80
+         - 443:443
+      depends_on:
+         - api
+      volumes:
+         - ./nginx.conf:/etc/nginx/nginx.conf:ro
+         - /var/lib/hydrominder/ssl/hydrominder.crt:/etc/ssl/certs/hydrominder-selfsigned.crt:ro
+         - /var/lib/hydrominder/ssl/hydrominder.key:/etc/ssl/private/hydrominder-selfsigned.key:ro
