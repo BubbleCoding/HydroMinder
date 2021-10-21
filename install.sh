@@ -16,7 +16,6 @@ sudo chown -R hydrominder:hydrominder /var/lib/hydrominder > /dev/null
 
 echo "##### Cloning the whole scripts repository..."
 cd /var/lib/hydrominder/
-# TODO: Overwrite existing directory
 sudo git clone https://gitlab.utwente.nl/cs21-32/hydrominderscripts.git scripts
 cd /var/lib/hydrominder/scripts/
 sudo git reset --hard && sudo git pull > /dev/null
