@@ -21,12 +21,27 @@ This is the installer for HydroMinder.
 $ curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/docker-compose/install.sh | sudo bash -s
 ```
 
-## Update Installation
+## Updating Existing Installations
 
 ```bash
 $ sudo /var/lib/hydrominder/scripts/update.sh
 ```
 
+## Disclaimer
+
+We, Team 32, do not provide any warranty and are not responsible for any damages caused by possible issues and misconfigurations in our code (Web App, API, Controller, and Scripts).
+
+## Privacy
+
+HydroMinder itself does not share any personal data with us or third-parties. HydroMinder itself is fully [GDPR compliant](https://gdpr.eu/).
+
+However, there will be comunication with third-parties when installing the required software.  
+For the related third parties, please familiarize yourself with these 
+privacy policies:
+- [GitLab Privacy Policy](https://about.gitlab.com/privacy/)
+- [Docker Privacy Policy](https://www.docker.com/legal/docker-privacy-policy)
+
 ## License
 
-HydroMinder API is [MIT licensed](LICENSE).
+HydroMinder Scripts is [MIT licensed](LICENSE).
+
