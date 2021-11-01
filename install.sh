@@ -99,7 +99,7 @@ EOT
 
 # Add the signal-watcher.sh script as a systemd service
 sudo systemctl disable signal-watcher.service
-sudo systemctl enable $SCRIPTS_DIR/service-watcher.service
+sudo systemctl enable $SCRIPTS_DIR/signal-watcher.service
 sudo systemctl start signal-watcher.service
 
 # Login DOCKER

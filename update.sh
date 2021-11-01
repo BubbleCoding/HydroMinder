@@ -13,7 +13,7 @@ sudo chmod ug+x $SCRIPTS_DIR/*.sh > /dev/null 2>&1
 
 # recreate signal-watcher.sh service
 sudo systemctl disable signal-watcher.service
-sudo systemctl enable $SCRIPTS_DIR/service-watcher.service
+sudo systemctl enable $SCRIPTS_DIR/signal-watcher.service
 sudo systemctl start signal-watcher.service
 
 # pull the containers
