@@ -97,7 +97,10 @@ sudo -u hydrominder tee $VAR_DIR/controller_token.env <<EOT > /dev/null
 API_CONTROLLER_TOKEN=${API_TOKEN}
 EOT
 
-# TODO: Add the $INSTALL_DIR/git/shutdown-watcher.sh script as a systemd service
+# Add the signal-watcher.sh script as a systemd service
+sudo systemctl disable signal-watcher.service
+sudo systemctl enable $SCRIPTS_DIR/service-watcher.service
+sudo systemctl start signal-watcher.service
 
 # Login DOCKER
 echo "##### Authenticating docker repository..."
