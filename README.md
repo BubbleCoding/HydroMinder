@@ -24,7 +24,7 @@ $ curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/docker-c
 ## Updating Existing Installations
 
 ```bash
-$ sudo /var/lib/hydrominder/scripts/update.sh
+$ curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/docker-compose/update.sh | sudo bash -s
 ```
 
 ## Disclaimer
@@ -36,12 +36,12 @@ We, Team 32, do not provide any warranty and are not responsible for any damages
 HydroMinder itself does not share any personal data with us or third-parties. HydroMinder itself is fully [GDPR compliant](https://gdpr.eu/).
 
 However, there will be comunication with third-parties when installing the required software.  
-For the related third parties, please familiarize yourself with these 
+For the related third parties, please familiarize yourself with these
 privacy policies:
-- [GitLab Privacy Policy](https://about.gitlab.com/privacy/)
-- [Docker Privacy Policy](https://www.docker.com/legal/docker-privacy-policy)
+
+-   [GitLab Privacy Policy](https://about.gitlab.com/privacy/)
+-   [Docker Privacy Policy](https://www.docker.com/legal/docker-privacy-policy)
 
 ## License
 
 HydroMinder Scripts is [MIT licensed](LICENSE).
-
