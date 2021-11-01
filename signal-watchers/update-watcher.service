@@ -4,8 +4,7 @@ Description=Hydrominder Update Signal Watcher
 [Service]
 Restart=on-failure
 RestartSec=5s
-PartOf=signal-watcher.target
 ExecStart=/var/lib/hydrominder/scripts/signal-watchers/update-watcher.sh
 
 [Install]
-WantedBy=signal-watcher.target
+WantedBy=multi-user.target
