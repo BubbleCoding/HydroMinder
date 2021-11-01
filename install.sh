@@ -98,9 +98,7 @@ API_CONTROLLER_TOKEN=${API_TOKEN}
 EOT
 
 # Add the signal-watchers as systemd services
-sudo systemctl disable signal-watcher.target
-sudo systemctl enable $SCRIPTS_DIR/signal-watchers/signal-watcher.target
-sudo systemctl start signal-watcher.target
+sudo ./signal-watchers/create.sh
 
 # Login DOCKER
 echo "##### Authenticating docker repository..."

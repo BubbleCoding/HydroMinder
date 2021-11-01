@@ -12,12 +12,10 @@ sudo git reset --hard && sudo git pull
 sudo chmod ug+x $SCRIPTS_DIR/*.sh > /dev/null 2>&1
 
 # recreate signal-watcher.sh service
-sudo systemctl disable signal-watcher.target
-sudo systemctl enable $SCRIPTS_DIR/signal-watchers/signal-watcher.target
-sudo systemctl start signal-watcher.target
+sudo ./signal-watchers/create.sh
 
 # pull the containers
-./pull-containers.sh
+sudo ./pull-containers.sh
 
 echo "##### Restarting containers..."
 sudo docker-compose restart
