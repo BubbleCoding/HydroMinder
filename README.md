@@ -18,13 +18,13 @@ This is the installer for HydroMinder.
 ## All-In-One Install Command
 
 ```bash
-$ curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/docker-compose/install.sh | sudo bash -s
+$ curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/master/install.sh | sudo bash -s
 ```
 
 ## Updating Existing Installations
 
 ```bash
-$ curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/docker-compose/update.sh | sudo bash -s
+$ curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/master/update.sh | sudo bash -s
 ```
 
 ## Disclaimer

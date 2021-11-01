@@ -7,7 +7,7 @@ while inotifywait -e close_write /var/lib/hydrominder/update_signal; do
         if [ "$(cat /var/lib/hydrominder/update_signal)" = "true" ]; then
             # update the containers
             echo "Updating HydroMinder..."
-            curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/docker-compose/install.sh | sudo bash -s
+            curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/master/install.sh | sudo bash -s
             sudo echo "waiting" > /var/lib/hydrominder/update_signal
         fi
     fi
