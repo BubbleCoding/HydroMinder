@@ -17,6 +17,7 @@ services:
          - ../var/controller_token.env
       volumes:
          - ../shutdown_signal:/shutdown_signal
+         - ../update_signal:/update_signal
       depends_on:
          - postgres
    webapp:
