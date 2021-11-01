@@ -6,6 +6,8 @@ services:
       restart: unless-stopped
       env_file:
          - ../var/db.env
+      volumes:
+         - ../data:/var/lib/postgresql/data
    api:
       container_name: api
       image: registry.gitlab.utwente.nl/cs21-32/hydrominder_api

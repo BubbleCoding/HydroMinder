@@ -5,6 +5,7 @@ INSTALL_DIR="/var/lib/hydrominder"
 SCRIPTS_DIR="$INSTALL_DIR/scripts"
 VAR_DIR="$INSTALL_DIR/var"
 SSL_DIR="$INSTALL_DIR/ssl"
+DATA_DIR="$INSTALL_DIR/data"
 
 echo "##### Installing packages..."
 sudo apt-get update > /dev/null
@@ -17,6 +18,7 @@ sudo useradd --system -M -g hydrominder hydrominder > /dev/null
 
 echo "##### Setting up directories..."
 sudo mkdir -p $INSTALL_DIR > /dev/null
+sudo mkdir -p $INSTALL_DIR/data > /dev/null
 sudo chown -R hydrominder:hydrominder $INSTALL_DIR > /dev/null
 
 echo "##### Cloning the whole scripts repository..."
