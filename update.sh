@@ -12,9 +12,9 @@ sudo git reset --hard && sudo git pull
 sudo chmod ug+x $SCRIPTS_DIR/*.sh > /dev/null 2>&1
 
 # recreate signal-watcher.sh service
-sudo systemctl disable signal-watcher.service
-sudo systemctl enable $SCRIPTS_DIR/signal-watcher.service
-sudo systemctl start signal-watcher.service
+sudo systemctl disable signal-watcher.target
+sudo systemctl enable $SCRIPTS_DIR/signal-watchers/signal-watcher.target
+sudo systemctl start signal-watcher.target
 
 # pull the containers
 ./pull-containers.sh

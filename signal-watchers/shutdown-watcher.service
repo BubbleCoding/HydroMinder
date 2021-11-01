@@ -1,0 +1,11 @@
+[Unit]
+Description=Hydrominder Shutdown Signal Watcher
+
+[Service]
+Restart=on-failure
+RestartSec=5s
+PartOf=signal-watcher.target
+ExecStart=/var/lib/hydrominder/scripts/signal-watchers/shutdown-watcher.sh
+
+[Install]
+WantedBy=signal-watcher.target
