@@ -26,7 +26,8 @@ cd $INSTALL_DIR
 sudo git clone https://gitlab.utwente.nl/cs21-32/hydrominderscripts.git $SCRIPTS_DIR
 cd $SCRIPTS_DIR
 sudo git reset --hard && sudo git pull > /dev/null
-sudo chmod ug+x $SCRIPTS_DIR/**/*.sh > /dev/null 2>&1
+sudo chmod -R ug+x $SCRIPTS_DIR/**/*.sh > /dev/null 2>&1 #Deprecated by the next command, remove after review
+find $SCRIPTS_DIR -type f -name "*.sh" | xargs sudo chmod ug+x
 
 echo "##### Installing Docker and required packages..."
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release > /dev/null
