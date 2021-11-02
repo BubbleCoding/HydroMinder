@@ -18,8 +18,9 @@ sudo useradd --system -M -g hydrominder hydrominder > /dev/null
 
 echo "##### Setting up directories..."
 sudo mkdir -p $INSTALL_DIR > /dev/null
-sudo mkdir -p $INSTALL_DIR/data > /dev/null
+sudo mkdir -p $DATA_DIR > /dev/null
 sudo chown -R hydrominder:hydrominder $INSTALL_DIR > /dev/null
+sudo chmod -R 666 $DATA_DIR > /dev/null #Hotfix for permission issues
 
 echo "##### Cloning the whole scripts repository..."
 cd $INSTALL_DIR
