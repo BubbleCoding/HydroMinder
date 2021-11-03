@@ -5,7 +5,6 @@ INSTALL_DIR="/var/lib/hydrominder"
 SCRIPTS_DIR="$INSTALL_DIR/scripts"
 VAR_DIR="$INSTALL_DIR/var"
 SSL_DIR="$INSTALL_DIR/ssl"
-DATA_DIR="$INSTALL_DIR/data"
 
 echo "##### Installing packages..."
 sudo apt-get update > /dev/null
@@ -18,16 +17,13 @@ sudo useradd --system -M -g hydrominder hydrominder > /dev/null
 
 echo "##### Setting up directories..."
 sudo mkdir -p $INSTALL_DIR > /dev/null
-sudo mkdir -p $DATA_DIR > /dev/null
 sudo chown -R hydrominder:hydrominder $INSTALL_DIR > /dev/null
-sudo chmod -R 666 $DATA_DIR > /dev/null #Hotfix for permission issues
 
 echo "##### Cloning the whole scripts repository..."
 cd $INSTALL_DIR
 sudo git clone https://gitlab.utwente.nl/cs21-32/hydrominderscripts.git $SCRIPTS_DIR
 cd $SCRIPTS_DIR
 sudo git reset --hard && sudo git pull > /dev/null
-sudo chmod -R ug+x $SCRIPTS_DIR/**/*.sh > /dev/null 2>&1 #Deprecated by the next command, remove after review
 find $SCRIPTS_DIR -type f -name "*.sh" | xargs sudo chmod ug+x
 
 echo "##### Installing Docker and required packages..."

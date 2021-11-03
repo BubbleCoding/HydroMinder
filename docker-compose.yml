@@ -7,7 +7,7 @@ services:
       env_file:
          - ../var/db.env
       volumes:
-         - ../data:/var/lib/postgresql/data
+         - pgdata:/var/lib/postgresql/data
    api:
       container_name: api
       image: registry.gitlab.utwente.nl/cs21-32/hydrominder_api
@@ -37,3 +37,5 @@ services:
          - ./nginx.conf:/etc/nginx/nginx.conf:ro
          - ../ssl/hydrominder.crt:/etc/ssl/certs/hydrominder-selfsigned.crt:ro
          - ../ssl/hydrominder.key:/etc/ssl/private/hydrominder-selfsigned.key:ro
+volumes:
+   pgdata:
