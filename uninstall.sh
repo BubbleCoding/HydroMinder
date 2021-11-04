@@ -13,6 +13,7 @@ case $input in
     cd /var/lib
     sudo rm -rf /var/lib/hydrominder
     sudo rm -f /usr/share/keyrings/docker-archive-keyring.gpg
+    sudo rm -f /etc/apt/sources.list.d/docker.list
     echo "##### Removing user..."
     sudo userdel hydrominder > /dev/null
  ;;
