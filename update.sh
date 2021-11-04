@@ -9,7 +9,7 @@ echo "##### Updating scripts..."
 # git reset hard and pull
 sudo git reset --hard && sudo git pull
 # chmod all scripts again
-sudo chmod ug+x $SCRIPTS_DIR/**/*.sh > /dev/null 2>&1
+find $SCRIPTS_DIR -type f -name "*.sh" | xargs sudo chmod ug+x
 
 # recreate signal-watcher.sh service
 sudo ./signal-watchers/create.sh
