@@ -37,5 +37,15 @@ services:
          - ./nginx.conf:/etc/nginx/nginx.conf:ro
          - ../ssl/hydrominder.crt:/etc/ssl/certs/hydrominder-selfsigned.crt:ro
          - ../ssl/hydrominder.key:/etc/ssl/private/hydrominder-selfsigned.key:ro
+   controller:
+      container_name: controller
+      image: registry.gitlab.utwente.nl/cs21-32/hydrominder
+      restart: unless-stopped
+      privileged: true
+      volumes:
+         - /sys:/sys
+      env_file:
+         - ../var/controller_token.env
+         - ../var/controller.env
 volumes:
    pgdata:
