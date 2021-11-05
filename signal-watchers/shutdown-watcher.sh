@@ -8,7 +8,7 @@ while inotifywait -e close_write /var/lib/hydrominder/shutdown_signal; do
             # shutdown the machine
             echo "Shutting down..."
             sudo shutdown -h now
-echo "waiting" | sudo tee /var/lib/hydrominder/shutdown_signal
+            echo "waiting" | sudo tee /var/lib/hydrominder/shutdown_signal
         fi
     fi
 done
