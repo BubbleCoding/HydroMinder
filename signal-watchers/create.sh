@@ -2,6 +2,10 @@
 INSTALL_DIR="/var/lib/hydrominder"
 SCRIPTS_DIR="$INSTALL_DIR/scripts"
 
+
+sudo -u hydrominder touch $INSTALL_DIR/shutdown_signal
+sudo -u hydrominder touch $INSTALL_DIR/update_signal
+
 sudo systemctl disable shutdown-watcher.service
 sudo systemctl disable update-watcher.service
 
