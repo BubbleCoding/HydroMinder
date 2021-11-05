@@ -4,7 +4,7 @@ Description=Hydrominder Shutdown Signal Watcher
 [Service]
 Restart=on-failure
 RestartSec=5s
-ExecStart=/var/lib/hydrominder/scripts/signal-watchers/shutdown-watcher.sh
+ExecStart=/bin/bash /var/lib/hydrominder/scripts/signal-watchers/shutdown-watcher.sh
 
 [Install]
 WantedBy=multi-user.target
