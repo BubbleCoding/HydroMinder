@@ -99,10 +99,20 @@ sudo -u hydrominder touch $VAR_DIR/webapp.env
 sudo -u hydrominder tee $VAR_DIR/webapp.env <<EOT > /dev/null
 EOT
 
-# Controller env
+# Controller_token env
 sudo -u hydrominder touch $VAR_DIR/controller_token.env
 sudo -u hydrominder tee $VAR_DIR/controller_token.env <<EOT > /dev/null
 API_CONTROLLER_TOKEN=${API_TOKEN}
+EOT
+
+# Controller env
+sudo -u hydrominder touch $VAR_DIR/controller.env
+sudo -u hydrominder tee $VAR_DIR/controller.env <<EOT > /dev/null
+ENV=production
+REFERENCE_UNIT=444
+
+API=https://hydrominder.local/api #This needs to refer to the pi, not the container so localhost is probably not an option
+USER_ID=1
 EOT
 
 # Add the signal-watchers as systemd services
