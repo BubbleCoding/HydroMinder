@@ -18,4 +18,4 @@ sudo ./signal-watchers/create.sh
 sudo ./pull-containers.sh
 
 echo "##### Restarting containers..."
-sudo docker-compose restart
+sudo docker-compose up -d
