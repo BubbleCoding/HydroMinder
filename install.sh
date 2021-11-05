@@ -71,14 +71,16 @@ SECRET=${COOKIE_SECRET}
 EOT
 fi
 
-echo "##### Creating environment variable files..."
 # DB env
-sudo -u hydrominder touch $VAR_DIR/db.env
-sudo -u hydrominder tee $VAR_DIR/db.env <<EOT  > /dev/null
+if sudo [ ! -f $VAR_DIR/db.env ]; then
+    # this should NEVER change
+    sudo -u hydrominder touch $VAR_DIR/db.env
+    sudo -u hydrominder tee $VAR_DIR/db.env <<EOT  > /dev/null
 POSTGRES_DB=hydrominder
 POSTGRES_USER=hydrominder
 POSTGRES_PASSWORD=${DB_PASSWORD}
 EOT
+fi
 
 GITLAB_HYDROMINDER_API_TOKEN=9PATcQD3EYCRf8K5iaTX
 GITLAB_HYDROMINDER_APP_TOKEN=dPzRPw8tiTLVnsSL3GiH
