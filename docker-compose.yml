@@ -17,6 +17,7 @@ services:
          - ../var/api.env
          - ../var/api_cookie.env
          - ../var/controller_token.env
+         - ../var/docker_digests.env
       volumes:
          - ../shutdown_signal:/shutdown_signal
          - ../update_signal:/update_signal

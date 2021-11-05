@@ -80,11 +80,18 @@ POSTGRES_USER=hydrominder
 POSTGRES_PASSWORD=${DB_PASSWORD}
 EOT
 
+GITLAB_HYDROMINDER_API_TOKEN=9PATcQD3EYCRf8K5iaTX
+GITLAB_HYDROMINDER_APP_TOKEN=dPzRPw8tiTLVnsSL3GiH
+GITLAB_HYDROMINDER_TOKEN=q3RZYyqNPRLsCsXjNiBz
+
 # API env
 sudo -u hydrominder touch $VAR_DIR/api.env
 sudo -u hydrominder tee $VAR_DIR/api.env <<EOT > /dev/null
 DB_HOST=postgres
 DB_PORT=5432
+GITLAB_HYDROMINDER_API_TOKEN=${GITLAB_HYDROMINDER_API_TOKEN}
+GITLAB_HYDROMINDER_APP_TOKEN=${GITLAB_HYDROMINDER_APP_TOKEN}
+GITLAB_HYDROMINDER_TOKEN=${GITLAB_HYDROMINDER_TOKEN}
 EOT
 
 # Web App env
@@ -104,9 +111,9 @@ sudo ./signal-watchers/create.sh
 # Login DOCKER
 echo "##### Authenticating docker repository..."
 sudo -u hydrominder mkdir -p $INSTALL_DIR/docker_configs > /dev/null
-sudo docker --config $INSTALL_DIR/docker_configs/.hydrominder_api login registry.gitlab.utwente.nl -u CLIENT -p AZuNxneL16MhQ2xsxDBv 2> /dev/null
-sudo docker --config $INSTALL_DIR/docker_configs/.hydrominder_app login registry.gitlab.utwente.nl -u CLIENT -p SQyRA_B2hzBXZJ9sdiUs 2> /dev/null
-sudo docker --config $INSTALL_DIR/docker_configs/.hydrominder_controller login registry.gitlab.utwente.nl -u CLIENT -p qV439CsvoBqdWKJ2z5-M 2> /dev/null
+sudo docker --config $INSTALL_DIR/docker_configs/.hydrominder_api login registry.gitlab.utwente.nl -u CLIENT -p ${GITLAB_HYDROMINDER_API_TOKEN} 2> /dev/null
+sudo docker --config $INSTALL_DIR/docker_configs/.hydrominder_app login registry.gitlab.utwente.nl -u CLIENT -p ${GITLAB_HYDROMINDER_APP_TOKEN} 2> /dev/null
+sudo docker --config $INSTALL_DIR/docker_configs/.hydrominder_controller login registry.gitlab.utwente.nl -u CLIENT -p ${GITLAB_HYDROMINDER_TOKEN} 2> /dev/null
 
 # pull the containers
 sudo ./pull-containers.sh
