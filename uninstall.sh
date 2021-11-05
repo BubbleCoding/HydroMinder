@@ -16,6 +16,8 @@ case $input in
     sudo rm -f /etc/apt/sources.list.d/docker.list
     echo "##### Removing user..."
     sudo userdel hydrominder > /dev/null
+    echo "##### Removing services..."
+    sudo ./signal-watchers.destroy.sh > /dev/null
  ;;
     [nN][oO]|[nN]|'')
  echo "##### Cancelling..."
