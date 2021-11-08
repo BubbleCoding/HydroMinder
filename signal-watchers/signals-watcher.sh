@@ -13,13 +13,13 @@ while inotifywait -e close_write /var/lib/hydrominder/signals; do
         if [ $ACTION = "shutdown" ]; then
             echo "Shutting down..."
             sudo shutdown -h now
-        else if [ $ACTION = "update" ]; then
+        elif [ $ACTION = "update" ]
             echo "Updating HydroMinder..."
             curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/master/update.sh | sudo bash -s
-        else if [ $ACTION = "backup" ]; then
+        elif [ $ACTION = "backup" ]
             echo "Backing up HydroMinder..."
             sudo /var/lib/hydrominder/backup.sh $PARAM1 $PARAM2
-        else if [ $ACTION = "restore" ]; then
+        elif [ $ACTION = "restore" ]
             echo "Restoring HydroMinder..."
             sudo /var/lib/hydrominder/restore.sh $PARAM1 $PARAM2
         fi
