@@ -50,6 +50,7 @@ if sudo [ ! -f $SSL_DIR/hydrominder.key ]; then
     echo "##### Generating key..."
     sudo openssl req -newkey rsa:2048 -x509 -sha256 -days 3650 -nodes -subj "/C=US/ST=State/L=City/O=Dis/CN=*" -keyout $SSL_DIR/hydrominder.key -out $SSL_DIR/hydrominder.crt > /dev/null
 fi
+SSL_FINGERPRINT=$(openssl x509 -noout -fingerprint -sha256 -inform pem -in $SSL_DIR/hydrominder.crt | cut -d "=" -f2 | tr -d :)
 
 echo "##### Generating password for DB..."
 DB_PASSWORD=$(openssl rand -base64 12)
@@ -115,6 +116,8 @@ REFERENCE_UNIT=444
 
 API=https://hydrominder.local/api #This needs to refer to the pi, not the container so localhost is probably not an option
 USER_ID=1
+
+SSL_FINGERPRINT=${SSL_FINGERPRINT}
 EOT
 
 # Add the signal-watchers as systemd services
