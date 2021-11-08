@@ -42,9 +42,9 @@ services:
       container_name: controller
       image: registry.gitlab.utwente.nl/cs21-32/hydrominder
       restart: unless-stopped
-      privileged: true
-      volumes:
-         - /sys:/sys
+      devices:
+         - /dev/video0:/dev/video0
+         - /dev/gpiomem:/dev/gpiomem
       env_file:
          - ../var/controller_token.env
          - ../var/controller.env
