@@ -1,0 +1,10 @@
+[Unit]
+Description=Hydrominder Signals Watcher
+
+[Service]
+Restart=on-failure
+RestartSec=5s
+ExecStart=/bin/bash /var/lib/hydrominder/scripts/signal-watchers/signals-watcher.sh
+
+[Install]
+WantedBy=multi-user.target
