@@ -6,7 +6,7 @@ while inotifywait -e close_write /var/lib/hydrominder/signals; do
     if [ -f /var/lib/hydrominder/signals ]; then
         CONTENT="$(cat /var/lib/hydrominder/signals)"
         # split on '::::::::::' https://stackoverflow.com/a/5257398
-        SPLIT="${CONTENT//\:\:\:\:\:\:\:\:\:\:/ }"
+        SPLIT=(${CONTENT//\:\:\:\:\:\:\:\:\:\:/ })
         ACTION=${SPLIT[0]}
         PARAM1=${SPLIT[1]}
         if [ "$ACTION" = "shutdown" ]; then
