@@ -108,13 +108,19 @@ sudo -u hydrominder tee $VAR_DIR/controller_token.env <<EOT > /dev/null
 API_CONTROLLER_TOKEN=${API_TOKEN}
 EOT
 
+echo In order to configure the scale correctly, please follow these instructions to determine the reference unit for your weight sensor:
+echo https://example.com/docs/scale
+read -p "Weight sensor reference unit (integer): " USER_SCALE
+echo 
+
 # Controller env
 sudo -u hydrominder touch $VAR_DIR/controller.env
 sudo -u hydrominder tee $VAR_DIR/controller.env <<EOT > /dev/null
 ENV=production
-REFERENCE_UNIT=444
+REFERENCE_UNIT=${USER_SCALE}
 
-API=https://hydrominder.local/api #This needs to refer to the pi, not the container so localhost is probably not an option
+API_URL=http://api:3001
+# use userid=1 only for now
 USER_ID=1
 
 SSL_FINGERPRINT=${SSL_FINGERPRINT}
