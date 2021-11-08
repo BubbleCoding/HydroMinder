@@ -20,6 +20,7 @@ services:
          - ../var/docker_digests.env
       volumes:
          - ../signals:/signals
+         - ../backups:/backups
       depends_on:
          - postgres
    webapp:
