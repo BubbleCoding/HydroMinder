@@ -110,7 +110,7 @@ EOT
 
 echo In order to configure the scale correctly, please follow these instructions to determine the reference unit for your weight sensor:
 echo https://example.com/docs/scale
-read -p "Weight sensor reference unit (integer): " USER_SCALE
+read -p "Weight sensor reference unit (integer): " USER_SCALE </dev/tty
 echo 
 
 # Controller env
