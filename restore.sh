@@ -1,6 +1,6 @@
 #! /bin/bash
 if [ "$#" -ne 1 ]; then
-    echo "Illegal number of parameters. Usage: ./restore.sh filename.zip password"
+    echo "Illegal number of parameters. Usage: ./restore.sh filename.tar.gz"
 else
     INSTALL_DIR="/var/lib/hydrominder"
     FILE=$INSTALL_DIR/backups/$1
@@ -13,7 +13,7 @@ else
         cd $INSTALL_DIR/scripts
         sudo docker-compose stop
         cd $TMP_DIR
-        unzip -P $FILE
+        tar xf $FILE
         rm -rf $INSTALL_DIR/ssl
         rm -rf $INSTALL_DIR/var
         mv ssl $INSTALL_DIR

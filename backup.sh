@@ -1,6 +1,6 @@
 #! /bin/bash
 if [ "$#" -ne 1 ]; then
-    echo "Illegal number of parameters. Usage: ./backup.sh filename.zip password"
+    echo "Illegal number of parameters. Usage: ./backup.sh filename.tar.gz"
 else
     dirname=/tmp/hydrominder_backup_$1
     mkdir -p $dirname
@@ -11,6 +11,6 @@ else
     sudo cp -r $INSTALL_DIR/var .
     BACKUP_DIR="$INSTALL_DIR/backups"
     mkdir -p $BACKUP_DIR
-    zip -e -P $2 -r $BACKUP_DIR/$1 *
+    tar czf $BACKUP_DIR/$1 *
     rm -r $dirname
 fi
