@@ -17,10 +17,10 @@ while inotifywait -e close_write /var/lib/hydrominder/signals; do
             curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/master/update.sh | sudo bash -s
         elif [ "$ACTION" = "backup" ]; then
             echo "Backing up HydroMinder..."
-            sudo /var/lib/hydrominder/backup.sh "$PARAM1"
+            sudo /var/lib/hydrominder/scripts/backup.sh "$PARAM1"
         elif [ "$ACTION" = "restore" ]; then
             echo "Restoring HydroMinder..."
-            sudo /var/lib/hydrominder/restore.sh "$PARAM1"
+            sudo /var/lib/hydrominder/scripts/restore.sh "$PARAM1"
         fi
         echo "waiting" | sudo tee /var/lib/hydrominder/signals
     fi
