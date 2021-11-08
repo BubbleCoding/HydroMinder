@@ -17,7 +17,7 @@ case $input in
     echo "##### Removing user..."
     sudo userdel hydrominder > /dev/null
     echo "##### Removing services..."
-    sudo ./signal-watchers.destroy.sh > /dev/null
+    sudo ./signal-watchers/destroy.sh > /dev/null
  ;;
     [nN][oO]|[nN]|'')
  echo "##### Cancelling..."
