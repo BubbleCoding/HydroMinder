@@ -9,7 +9,6 @@ while inotifywait -e close_write /var/lib/hydrominder/signals; do
         SPLIT=(${CONTENT//\:\:\:\:\:\:\:\:\:\:/ })
         ACTION=${SPLIT[0]}
         PARAM1=${SPLIT[1]}
-        PARAM2=${SPLIT[1]}
         if [ $ACTION = "shutdown" ]; then
             echo "Shutting down..."
             sudo shutdown -h now
@@ -18,10 +17,10 @@ while inotifywait -e close_write /var/lib/hydrominder/signals; do
             curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/master/update.sh | sudo bash -s
         elif [ $ACTION = "backup" ]
             echo "Backing up HydroMinder..."
-            sudo /var/lib/hydrominder/backup.sh $PARAM1 $PARAM2
+            sudo /var/lib/hydrominder/backup.sh $PARAM1
         elif [ $ACTION = "restore" ]
             echo "Restoring HydroMinder..."
-            sudo /var/lib/hydrominder/restore.sh $PARAM1 $PARAM2
+            sudo /var/lib/hydrominder/restore.sh $PARAM1
         fi
         echo "waiting" | sudo tee /var/lib/hydrominder/signals
     fi
