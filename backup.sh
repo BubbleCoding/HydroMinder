@@ -8,7 +8,7 @@ else
     cd $dirname
     sudo docker exec -i postgres /usr/local/bin/pg_dumpall -U hydrominder > postgres-backup.sql
     sudo cp -r $INSTALL_DIR/ssl .
-    sudo cp -r $INSTALL_DIR/var .
+    sudo rsync -r --exclude='docker_digests.env' $INSTALL_DIR/var .
     BACKUP_DIR="$INSTALL_DIR/backups"
     mkdir -p $BACKUP_DIR
     tar czf $BACKUP_DIR/$1 *
