@@ -1,11 +1,16 @@
 #! /bin/sh
 echo "##### Uninstalling hydrominder"
+echo "WARNING: This will prune -a the docker systems and prune docker volumes, therefore deleting all containers which are turned off and their associated data."
 read -r -p "Are You Sure? [y/N] " input
- 
+
 case $input in
     [yY][eE][sS]|[yY])
-    echo "##### Stopping hydrominder..."
-    cd /var/lib/hydrominder/scripts && sudo docker-compose stop
+    INSTALL_DIR="/var/lib/hydrominder"
+    if [[ -d "$INSTALL_DIR" ]]
+    then
+      echo "##### Stopping hydrominder..."
+      cd $INSTALL_DIR/scripts && sudo docker-compose stop
+    fi
     echo "##### Removing docker containers, volumes, etc..."
     sudo docker system prune -af > /dev/null
     sudo docker volume prune -f > /dev/null
@@ -14,10 +19,10 @@ case $input in
     echo "##### Removing services..."
     sudo ./signal-watchers/destroy.sh > /dev/null
     echo "##### Removing files..."
-    cd /var/lib
-    sudo rm -rf /var/lib/hydrominder
-    sudo rm -f /usr/share/keyrings/docker-archive-keyring.gpg
-    sudo rm -f /etc/apt/sources.list.d/docker.list
+    cd $INSTALL_DIR/..
+    sudo rm -rf $INSTALL_DIR
+    echo "##### Removing user..."
+    sudo userdel hydrominder 2> /dev/null
  ;;
     [nN][oO]|[nN]|'')
  echo "##### Cancelling..."
