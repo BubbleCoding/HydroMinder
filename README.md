@@ -29,7 +29,12 @@ $ curl -fsSL https://gitlab.utwente.nl/cs21-32/hydrominderscripts/-/raw/master/u
 
 ## Disclaimer
 
-We, Team 32, do not provide any warranty and are not responsible for any damages caused by possible issues and misconfigurations in our code (Web App, API, Controller, and Scripts).
+We, Team 32, do not provide any warranty and are not responsible for any damages caused by possible issues and misconfigurations in our code (Web App, API, Controller, and Scripts).  
+We have done our best to make a secure product, but there are a few things out of our control or simply unfeasable. Because of this we recommend the following:  
+- Choose strong passwords
+- Keep an eye on your network (if it's compromised the availability cannot be guaranteed)
+- Keep an eye on the physical device (there are no protections in place when the physical device has been compromised)
+- Verify the TLS key's fingerprint with the one displayed on the LCD
 
 ## Privacy
 
