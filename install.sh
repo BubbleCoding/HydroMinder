@@ -53,8 +53,7 @@ if sudo [ ! -f $SSL_DIR/hydrominder.key ]; then
     echo "##### Generating key..."
     sudo openssl req -newkey rsa:2048 -x509 -sha256 -days 3650 -nodes -subj "/C=US/ST=State/L=City/O=Dis/CN=*" -keyout $SSL_DIR/hydrominder.key -out $SSL_DIR/hydrominder.crt > /dev/null
 fi
-SSL_FINGERPRINT=$(openssl x509 -noout -fingerprint -sha256 -inform pem -in $SSL_DIR/hydrominder.crt | cut -d "=" -f2 | tr -d :)
-
+SSL_FINGERPRINT=$(openssl x509 -noout -fingerprint -sha256 -inform pem -in /var/lib/hydrominder/ssl/hydrominder.crt | cut -d "=" -f2 | tr -d : | fold -w 16 | sed 's/\(.\{4\}\)/\1 /g')
 echo "##### Generating password for DB..."
 DB_PASSWORD=$(openssl rand -base64 12)
 

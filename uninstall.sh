@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 echo "##### Uninstalling hydrominder"
 echo "WARNING: This will prune -a the docker systems and prune docker volumes, therefore deleting all containers which are turned off and their associated data."
 read -r -p "Are You Sure? [y/N] " input
