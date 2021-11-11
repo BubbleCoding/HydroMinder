@@ -41,7 +41,7 @@ services:
    controller:
       container_name: controller
       privileged: true
-      image: registry.gitlab.utwente.nl/cs21-32/hydrominder:32bit
+      image: registry.gitlab.utwente.nl/cs21-32/hydrominder:latest
       restart: unless-stopped
       devices:
          - /dev/video0:/dev/video0
@@ -49,5 +49,7 @@ services:
       env_file:
          - ../var/controller_token.env
          - ../var/controller.env
+      stdin_open: true
+      tty: true
 volumes:
    pgdata:
