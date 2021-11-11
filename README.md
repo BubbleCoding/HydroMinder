@@ -21,6 +21,8 @@ This is the installer for HydroMinder.
 
 ## Build the system yourself
 
+_Note: The Controller container is currently not functional. It will require manual setup (clone repo, install python3, install dependencies, run)._
+
 To build the Hydrominder you need to build the electric diagram shown in the image below. Five important things to note here.
 
 -   The two servos(31 and 32) are mounted in a pan-tilt mechanism.
