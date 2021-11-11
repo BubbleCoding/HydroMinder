@@ -21,7 +21,7 @@ This is the installer for HydroMinder.
 
 ## Build the system yourself
 
-_Note: The Controller container is currently not functional. It will require manual setup (clone repo, install python3, install dependencies, run)._
+_Note: The Controller container is currently not functional. It will require manual setup (clone repo, install python3, install dependencies, run). You can still run the AOI install script, however, it will show an error for the controller. The Web App and API will still be available on port 80_
 
 To build the Hydrominder you need to build the electric diagram shown in the image below. Five important things to note here.
 
