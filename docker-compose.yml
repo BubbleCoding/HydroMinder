@@ -40,6 +40,7 @@ services:
          - ../ssl/hydrominder.key:/etc/ssl/private/hydrominder-selfsigned.key:ro
    controller:
       container_name: controller
+      privileged: true
       image: registry.gitlab.utwente.nl/cs21-32/hydrominder:32bit
       restart: unless-stopped
       devices:
