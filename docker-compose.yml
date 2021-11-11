@@ -40,7 +40,7 @@ services:
          - ../ssl/hydrominder.key:/etc/ssl/private/hydrominder-selfsigned.key:ro
    controller:
       container_name: controller
-      image: registry.gitlab.utwente.nl/cs21-32/hydrominder
+      image: registry.gitlab.utwente.nl/cs21-32/hydrominder:latest
       restart: unless-stopped
       devices:
          - /dev/video0:/dev/video0
